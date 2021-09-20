@@ -1,18 +1,43 @@
-const container = document.querySelector('#gridContainer');
-container.setAttribute('class', 'gridContainerClass');
+const pageContainer = document.querySelector('#page');
+const EASContainer = document.querySelector('#EAScontainer');
+const gridContainer = document.querySelector('#gridContainer');
+const buttonContainer = document.querySelector('#buttonContainer');
+
+const clearButton = document.querySelector('#clear');
+const rgbButton = document.querySelector('#RGB');
+const colorButton = document.querySelector('#color');
+
+titleDiv = document.createElement('div');
+titleDiv.setAttribute('id', 'title');
+pageContainer.insertBefore(titleDiv, EASContainer);
+
+titleDiv.textContent = 'Etch-A-Sketch';
+
+clearButton.addEventListener('click', resetGrid, false);
+
+gridContainer.setAttribute('class', 'gridContainerClass');
 
 let divBoxes = []
 
-for (i = 0; i < 16; i++){
+let boxNum = 169;
+let boxInRow = Math.sqrt(boxNum);
+let heightWidth = (100 / boxInRow) + '%';
+document.documentElement.style.setProperty('--boxNum', heightWidth)
+
+
+for (i = 0; i < boxNum; i++){
     divBoxes[i] = document.createElement('div');
     divBoxes[i].setAttribute('class', 'gridBox');
-    container.appendChild(divBoxes[i]);
+    gridContainer.appendChild(divBoxes[i]);
     divBoxes[i].addEventListener('mouseover', hoverChange, true)
 }
 
 function hoverChange(i){
     this.setAttribute('style', 'background-color: black;');
 }
-paperBtn.addEventListener('click', () => {result = Game('paper'); Scoring(score,result)});
-scissorsBtn.addEventListener('click', () => {result = Game('scissors'); Scoring(score,result)});
 
+function resetGrid(){
+    for (i = 0; i < boxNum; i++){
+        divBoxes[i].setAttribute('style', 'background-color: white');
+    }
+}
