@@ -27,8 +27,8 @@ rgbButton.addEventListener('click', setRGB, false);
 //setup variables for box numbers. css variable for height/width
 let divBoxes = []
 
-let boxNum = 16;
-let boxInRow = Math.sqrt(boxNum);
+let boxInRow = 4;
+let totalBoxes = boxInRow*boxInRow;
 let heightWidth = (100 / boxInRow) + '%';
 document.documentElement.style.setProperty('--boxNum', heightWidth)
 
@@ -40,12 +40,14 @@ let chosenColor = document.getElementById('colorValue').value;
 const colorArray = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
 
 //create the grid
-for (i = 0; i < boxNum; i++){
+/*
+for (i = 0; i < totalBoxes; i++){
     divBoxes[i] = document.createElement('div');
     divBoxes[i].setAttribute('class', 'gridBox');
     gridContainer.appendChild(divBoxes[i]);
     divBoxes[i].addEventListener('mouseover', hoverChange, true)
 }
+*/
 
 //setup slider
 const sliderValues = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
@@ -72,8 +74,9 @@ function hoverChange(){
 
 //function to reset grid back to white
 function resetGrid(){
-    for (i = 0; i < boxNum; i++){
-        divBoxes[i].setAttribute('style', 'background-color: white');
+    allBoxes = document.getElementsByClassName('gridBox');
+    for (i = 0; i < allBoxes.length; i++){
+        allBoxes[i].setAttribute('style', 'background-color: white');
     }
 }
 
@@ -81,7 +84,11 @@ function drawGrid(boxes){
     boxNum = boxes;
     heightWidth = (100 / boxes) + '%';
     document.documentElement.style.setProperty('--boxNum', heightWidth)
+
+    allBoxes = document.querySelector('#gridContainer');
+    removeAllChildNodes(allBoxes);
     
+
     for (i = 0; i < boxes*boxes; i++){        
         divBoxes[i] = document.createElement('div');
         divBoxes[i].setAttribute('class', 'gridBox');
@@ -112,4 +119,11 @@ function colorSelect(){
 //function for color picker
 function setChosenColor(){
     chosenColor = document.getElementById('colorValue').value;
+}
+
+//remove child nodes
+function removeAllChildNodes(parent){
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
 }
