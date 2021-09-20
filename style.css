@@ -1,0 +1,19 @@
+.gridContainerClass {
+    padding: 1px 1px 1px 1px;
+    display: flex;
+    background: green;
+    height: 804px;
+    width: 804px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1px;
+}
+
+.gridBox {
+    background: white;
+    /*border-style: dashed;
+    border-color: blue;*/
+    height: 200px;
+    width: 200px;
+}
