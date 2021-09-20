@@ -2,18 +2,19 @@
     padding: 1px 1px 1px 1px;
     display: flex;
     background: green;
-    height: 804px;
-    width: 804px;
+    height: 800px;
+    width: 800px;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 1px;
+    flex: 1 1 0%;
 }
 
 .gridBox {
     background: white;
-    /*border-style: dashed;
-    border-color: blue;*/
-    height: 200px;
-    width: 200px;
+    -webkit-box-shadow:inset 0px 0px 0px 10px #FFFFFF;
+    -moz-box-shadow:inset 0px 0px 0px 10px #000000;
+    box-shadow:inset 0px 0px 0px 10px #000000;
+    height: 25%;
+    width: 25%;
 }
