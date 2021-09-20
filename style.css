@@ -60,5 +60,33 @@
     flex-direction: column;
     vertical-align: middle;
     align-content: center;
-    padding-right: 15px;
+    justify-content: center;
+}
+
+.btn {
+    background-color: white;
+    height: 100px;
+    width: 100px;
+    border-radius: 50px 50px;
+}
+
+.btn:hover {
+    background-color: rgb(165, 231, 165);
+}
+
+input[type="color"] {
+    -webkit-appearance: none;
+    border-radius: 50px 50px;
+    width: 100px;
+    height: 100px;
+}
+
+input[type="color"]::-webitkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 50%;
+    padding: 0;
 }

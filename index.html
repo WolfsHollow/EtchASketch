@@ -9,9 +9,11 @@
 <body id = 'page'>
   <div id = 'EAScontainer'>
     <div id = 'buttonContainer'>
-      <button id= 'clear'>Clear</button>
-      <button id= 'RGB'>RGB</button>
-      <input type="color" id= 'colorValue' value="#000000"></button>
+      <button class = 'btn' id= 'clear'>Clear</button>
+      <button class = 'btn' id= 'RGB'>RGB</button>
+      <input class = 'btn' type="color" id= 'colorValue' value="#000000"></button>
+      <input id='slider' type='range' min ='0' value='0' max='19' step='1'>
+      <div id='sliderOutput'></div>
     </div>
     <div id='gridContainer'></div>
   </div>

@@ -27,7 +27,7 @@ rgbButton.addEventListener('click', setRGB, false);
 //setup variables for box numbers. css variable for height/width
 let divBoxes = []
 
-let boxNum = 169;
+let boxNum = 16;
 let boxInRow = Math.sqrt(boxNum);
 let heightWidth = (100 / boxInRow) + '%';
 document.documentElement.style.setProperty('--boxNum', heightWidth)
@@ -47,6 +47,18 @@ for (i = 0; i < boxNum; i++){
     divBoxes[i].addEventListener('mouseover', hoverChange, true)
 }
 
+//setup slider
+const sliderValues = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+let input = document.getElementById('slider');
+let output = document.getElementById('sliderOutput');
+
+input.oninput = function(){
+    output.innerHTML = sliderValues[this.value];
+    drawGrid(output.innerHTML);
+};
+input.oninput();
+
+
 //function to 'draw' on hover
 function hoverChange(){
     chosenColor = document.getElementById('colorValue').value;
@@ -62,6 +74,19 @@ function hoverChange(){
 function resetGrid(){
     for (i = 0; i < boxNum; i++){
         divBoxes[i].setAttribute('style', 'background-color: white');
+    }
+}
+
+function drawGrid(boxes){
+    boxNum = boxes;
+    heightWidth = (100 / boxes) + '%';
+    document.documentElement.style.setProperty('--boxNum', heightWidth)
+    
+    for (i = 0; i < boxes*boxes; i++){        
+        divBoxes[i] = document.createElement('div');
+        divBoxes[i].setAttribute('class', 'gridBox');
+        gridContainer.appendChild(divBoxes[i]);
+        divBoxes[i].addEventListener('mouseover', hoverChange, true)
     }
 }
 
