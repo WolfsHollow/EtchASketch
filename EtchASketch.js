@@ -10,6 +10,8 @@ const buttonContainer = document.querySelector('#buttonContainer');
 const clearButton = document.querySelector('#clear');
 const rgbButton = document.querySelector('#RGB');
 const colorButton = document.querySelector('#color');
+const eraserButton = document.querySelector('#eraser');
+const clickButton = document.querySelector('#clickhover');
 
 
 //title
@@ -20,9 +22,10 @@ pageContainer.insertBefore(titleDiv, EASContainer);
 titleDiv.textContent = 'Etch-A-Sketch';
 
 
-//Add clear button
-clearButton.addEventListener('click', resetGrid, false);
-rgbButton.addEventListener('click', setRGB, false);
+//Add events for buttons
+let clearButtonOn = false;
+let rgbButtonOn = false;
+let eraserButtonOn = false;
 
 //setup variables for box numbers. css variable for height/width
 let divBoxes = []
@@ -39,18 +42,24 @@ let colorCount = 0;
 let chosenColor = document.getElementById('colorValue').value;
 const colorArray = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
 
-//create the grid
-/*
-for (i = 0; i < totalBoxes; i++){
-    divBoxes[i] = document.createElement('div');
-    divBoxes[i].setAttribute('class', 'gridBox');
-    gridContainer.appendChild(divBoxes[i]);
-    divBoxes[i].addEventListener('mouseover', hoverChange, true)
-}
-*/
+//setup eraser
+
+let eraserBool = false;
+let eraserColor = '#ffffff';
+
+clearButton.addEventListener('click', resetGrid);
+rgbButton.addEventListener('click', setRGB);
+rgbButton.addEventListener('click', toggleButton);
+eraserButton.addEventListener('click', eraserClick);
+eraserButton.addEventListener('click', toggleButton);
+clickButton.addEventListener('click', clickToggle);
+
 
 //setup slider
-const sliderValues = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+const sliderValues = [];
+for (i = 0; i < 101; i++){
+    sliderValues[i] = i;
+}
 let input = document.getElementById('slider');
 let output = document.getElementById('sliderOutput');
 
@@ -60,15 +69,17 @@ input.oninput = function(){
 };
 input.oninput();
 
-
 //function to 'draw' on hover
-function hoverChange(){
+function hoverChangePen(){
     chosenColor = document.getElementById('colorValue').value;
-    currentColor = chosenColor;
-    if (rgbBool) {
+    currentColor = chosenColor;    
+    if (eraserBool){
+        currentColor = eraserColor;
+    }  
+    else if (rgbBool) {
         currentColor = colorSelect();
         colorCount++;     
-    }    
+    }  
     this.setAttribute('style', `background-color: ${currentColor}`);
 }
 
@@ -93,19 +104,19 @@ function drawGrid(boxes){
         divBoxes[i] = document.createElement('div');
         divBoxes[i].setAttribute('class', 'gridBox');
         gridContainer.appendChild(divBoxes[i]);
-        divBoxes[i].addEventListener('mouseover', hoverChange, true)
+        divBoxes[i].addEventListener('mouseover', hoverChangePen, true)
     }
 }
 
+//turn on/off RGB
 function setRGB(){
     if (rgbBool){
         rgbBool = false;
-        console.log(rgbBool);
     }
     else if (!rgbBool){
         rgbBool = true;
-        console.log(rgbBool);
     }
+    console.log(rgbBool);
 }
 
 //function for rgb
@@ -121,9 +132,34 @@ function setChosenColor(){
     chosenColor = document.getElementById('colorValue').value;
 }
 
+//function for eraser
+function eraserClick(){
+    if (!eraserBool){eraserBool = true;}
+    else if (eraserBool){eraserBool = false;}
+    console.log(eraserBool);
+}
+
 //remove child nodes
 function removeAllChildNodes(parent){
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
     }
+}
+
+//toggles button styles On/OFF 
+function toggleButton(event){  
+    console.log(this);
+    let style = getComputedStyle(this);
+    let color = style.backgroundColor;
+    console.log(color); 
+    if (color === 'rgb(165, 231, 165)' || color ==='rgb(255, 255, 255)'){
+        this.setAttribute('style', 'background-color: green');
+    } 
+    else if (color === 'rgb(0, 128, 0)'){
+        this.setAttribute('style', 'background-color: white');
+    }
+}
+
+function clickToggle(){
+    
 }
