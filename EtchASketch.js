@@ -49,6 +49,7 @@ rgbButton.addEventListener('click', toggleButton);
 eraserButton.addEventListener('click', eraserClick);
 eraserButton.addEventListener('click', toggleButton);
 clickButton.addEventListener('click', clickToggle);
+clickButton.addEventListener('click', toggleButton);
 
 
 //setup slider
@@ -157,14 +158,12 @@ function removeAllChildNodes(parent){
 
 //toggles button styles On/OFF 
 function toggleButton(event){  
-    console.log(this);
     let style = getComputedStyle(this);
     let color = style.backgroundColor;
-    console.log(color); 
-    if (color === 'rgb(165, 231, 165)' || color ==='rgb(255, 255, 255)'){
-        this.setAttribute('style', 'background-color: green');
+    if (color == 'rgb(165, 231, 165)' || color == 'rgb(255, 255, 255)'){
+        this.setAttribute('style', 'background-color: skyblue');
     } 
-    else if (color === 'rgb(0, 128, 0)'){
+    else if (color == 'rgb(135, 206, 235)'){
         this.setAttribute('style', 'background-color: white');
     }
 }

@@ -9,7 +9,7 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background: blue;
+    background: rgb(10, 51, 70);
 }
 
 .gridContainerClass {
@@ -60,7 +60,7 @@
 }
 
 #buttonContainer{
-    background: purple;
+    background: rgb(25, 129, 177);
     width: 20%;
     max-width: 150px;
     display: flex;
