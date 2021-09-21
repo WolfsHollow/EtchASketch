@@ -21,12 +21,6 @@ pageContainer.insertBefore(titleDiv, EASContainer);
 
 titleDiv.textContent = 'Etch-A-Sketch';
 
-
-//Add events for buttons
-let clearButtonOn = false;
-let rgbButtonOn = false;
-let eraserButtonOn = false;
-
 //setup variables for box numbers. css variable for height/width
 let divBoxes = []
 
@@ -43,9 +37,11 @@ let chosenColor = document.getElementById('colorValue').value;
 const colorArray = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
 
 //setup eraser
-
 let eraserBool = false;
 let eraserColor = '#ffffff';
+
+//setup click/hover
+let clickToggleButton = false;
 
 clearButton.addEventListener('click', resetGrid);
 rgbButton.addEventListener('click', setRGB);
@@ -83,6 +79,19 @@ function hoverChangePen(){
     this.setAttribute('style', `background-color: ${currentColor}`);
 }
 
+function clickChange(){
+    chosenColor = document.getElementById('colorValue').value;
+    currentColor = chosenColor;
+    if (eraserBool){
+        currentColor = eraserColor;
+    }  
+    else if (rgbBool) {
+        currentColor = colorSelect();
+        colorCount++;     
+    }  
+    this.setAttribute('style', `background-color: ${currentColor}`);
+}
+
 //function to reset grid back to white
 function resetGrid(){
     allBoxes = document.getElementsByClassName('gridBox');
@@ -104,7 +113,7 @@ function drawGrid(boxes){
         divBoxes[i] = document.createElement('div');
         divBoxes[i].setAttribute('class', 'gridBox');
         gridContainer.appendChild(divBoxes[i]);
-        divBoxes[i].addEventListener('mouseover', hoverChangePen, true)
+        divBoxes[i].addEventListener('mouseover', hoverChangePen)
     }
 }
 
@@ -161,5 +170,22 @@ function toggleButton(event){
 }
 
 function clickToggle(){
-    
+    divBoxes = document.getElementsByClassName('gridBox');
+    console.log(clickToggleButton);
+    if (!clickToggleButton){
+        clickToggleButton = true;  
+        console.log(divBoxes.length);      
+        for (i = 0; i < divBoxes.length; i++){
+            divBoxes[i].removeEventListener('mouseover', hoverChangePen);
+            divBoxes[i].addEventListener('click', clickChange);
+        }
+    }
+    else if (clickToggleButton){
+        clickToggleButton = false;
+        console.log(divBoxes.length);
+        for (i = 0; i < divBoxes.length; i++){
+            divBoxes[i].removeEventListener('click', clickChange);
+            divBoxes[i].addEventListener('mousehover', hoverChangePen);
+        }
+    }
 }
