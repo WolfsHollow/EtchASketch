@@ -174,7 +174,6 @@ function clickToggle(){
     console.log(clickToggleButton);
     if (!clickToggleButton){
         clickToggleButton = true;  
-        console.log(divBoxes.length);      
         for (i = 0; i < divBoxes.length; i++){
             divBoxes[i].removeEventListener('mouseover', hoverChangePen);
             divBoxes[i].addEventListener('click', clickChange);
@@ -182,10 +181,9 @@ function clickToggle(){
     }
     else if (clickToggleButton){
         clickToggleButton = false;
-        console.log(divBoxes.length);
         for (i = 0; i < divBoxes.length; i++){
             divBoxes[i].removeEventListener('click', clickChange);
-            divBoxes[i].addEventListener('mousehover', hoverChangePen);
+            divBoxes[i].addEventListener('mouseover', hoverChangePen);
         }
     }
 }
